@@ -66,7 +66,7 @@ If you are struggling with the proxy, try to solve the proxy issue by followings
 **2. If you are behind the NTLM proxy**
 
   You could use the [robertdebock/docker-cntlm](https://hub.docker.com/r/robertdebock/docker-cntlm/) to create a sub proxy.
-The proxy for docker container using, should be something like: 172.17.0.1:3128. Then config the proxy as above. **
+The proxy for docker container using, should be something like: 172.17.0.1:3128. Then config the proxy as above.
 
 ## Samples
 You could refer to the samples to get started for visual regression testing.
@@ -130,8 +130,8 @@ You could refer to the samples to get started for visual regression testing.
 - For example, cd to the Gemini_Chrome_SimulatePC&iPhone.
 - Update the proxy in .gemini.js for necessary, if behind the proxy
 - Start the chrome driver: `chromedriver --port=6666 --silent &`
-- Create reference: `gemini update institutional.js`
-- Create Test: `gemini test institutional.js`
+- Create reference: `gemini update demo.js`
+- Create Test: `gemini test demo.js`
 
 ## Start & Use Docker Directly
 **1. Assume you have copied the folder "Sample" to the ~/Debug**
