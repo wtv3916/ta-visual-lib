@@ -62,7 +62,10 @@ If you are struggling with the proxy, try to solve the proxy issue by followings
 
   Need help here: [issue-895](https://github.com/gemini-testing/gemini/issues/895)
 
-**2. If you are behind the NTLM proxy, you could use the [robertdebock/docker-cntlm](https://hub.docker.com/r/robertdebock/docker-cntlm/) to create a sub proxy.
+
+**2. If you are behind the NTLM proxy**
+
+  You could use the [robertdebock/docker-cntlm](https://hub.docker.com/r/robertdebock/docker-cntlm/) to create a sub proxy.
 The proxy for docker container using, should be something like: 172.17.0.1:3128. Then config the proxy as above. **
 
 ## Samples
