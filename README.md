@@ -11,7 +11,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
 
 1. [BackstopJS - 3.1.19](https://github.com/garris/BackstopJS)
 
-2. [Gemini - 5.5.1](https://github.com/gemini-testing/gemini)  - **Recommend**
+2. [Gemini - 5.5.1](https://github.com/gemini-testing/gemini)
 
 ## Pre-Conditions If Behind the Proxy
 If you are struggling with the proxy, try to solve the proxy issue by followings
