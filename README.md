@@ -58,7 +58,7 @@ If you are struggling with the proxy, try to solve the proxy issue by followings
    ```
  
 
-- **Gemini+PhantomJS**
+- **Gemini-PhantomJS**
 
   Run the phantomJS driver as bellow:
   ``` 
@@ -201,7 +201,7 @@ You could refer to the samples to get started for visual regression testing.
 
 6. NPM v5.6.0
 
-7. BackstopJS v3.1.17
+7. BackstopJS v3.1.19
 
 8. CasperJS v1.1.4
 
