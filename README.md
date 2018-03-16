@@ -1,7 +1,7 @@
 # TA Visual Regression Testing Library
 
 ## Build
-Get the source from git [Kenith/ta-visual-lib](https://github.com/Kenith/ta-visual-lib), and build image: `docker build -t ta-visual-lib .`
+Get the source and sample from git [kenith/ta-visual-lib](https://github.com/Kenith/ta-visual-lib), and build image: `docker build -t ta-visual-lib .`
 
 Or, pull the image from docker hub - [kenith/ta-visual-lib](https://hub.docker.com/r/kenith/ta-visual-lib/): `docker pull kenith/ta-visual-lib:latest`
 
@@ -9,7 +9,7 @@ Or, pull the image from docker hub - [kenith/ta-visual-lib](https://hub.docker.c
 For now, we support the following Visual Regression Testing Library.
 No matter which tool you use, if no necessary, we suggest to use Chrome for Visual Regression.
 
-1. [BackstopJS - 3.1.17](https://github.com/garris/BackstopJS) - Unstable if engine=chrome, and asyncCaptureLimit > 2: [Issue-663](https://github.com/garris/BackstopJS/issues/663)
+1. [BackstopJS - 3.1.19](https://github.com/garris/BackstopJS)
 
 2. [Gemini - 5.5.1](https://github.com/gemini-testing/gemini)  - **Recommend**
 
@@ -60,7 +60,10 @@ If you are struggling with the proxy, try to solve the proxy issue by followings
 
 - **Gemini+PhantomJS**
 
-  Need help here: [issue-895](https://github.com/gemini-testing/gemini/issues/895)
+  Run the phantomJS driver as bellow:
+  ``` 
+  phantomjs --webdriver=9999 --ignore-ssl-errors==true --proxy=172.17.0.1:3128
+  ```
 
 
 **2. If you are behind the NTLM proxy**
@@ -80,17 +83,14 @@ You could refer to the samples to get started for visual regression testing.
 
 **1. BackstopJS_Chrome_SimulatePC&iPhone**
 - Suggest to set `"debugWindow": false` if running test
-- Not really emulate the mobile, just the view port
 
 **2. BackstopJS_Chrome_SimulateCookie&UserActions**
 - Suggest to set `"debugWindow": false` if running test
-- Not really emulate the mobile, just the view port
 - For passing cookie, if you site is using http, please edit backstop_data/engine_scripts/chromy/loadCookies.js: `cookie.url = 'http://' + cookie.domain;`
 - You could edit the backstop_data/engine_scripts/chromy/onReady.js to edit the user actions. All the defined user actions could be found in interactions.js
 
 **3. BackstopJS_PhantomJS_SimulatePC&iPhone**
 - Don't have parallel testing, see the [issue-591](https://github.com/garris/BackstopJS/issues/591)
-- Not really emulate the mobile, just the view port
 - Customized the backstop_data/engine_scripts/casper/onReady.js, and backstop_data/engine_scripts/casper/onBefore.js to avoid the hang on issue - [issue-599](https://github.com/garris/BackstopJS/issues/599)
 
 **4. Gemini_Chrome_SimulatePC&iPhone**
@@ -99,8 +99,11 @@ You could refer to the samples to get started for visual regression testing.
 
 **5. Gemini_Firefox_SimulatePC&iPhone**
 - Start the selenium-standalone before testing: `selenium-standalone start`
-- Not really emulate the mobile, just the view port
 - No headless mode of which is provided by Firefox 56+
+
+**6. Gemini_PhantomJS_SimulatePC&iPhone**
+- Start phantomjs driver before testing: `phantomjs --webdriver=9999 --ignore-ssl-errors==true`
+- Not suggest to use Phantom for test, could trigger error "'unsafe-eval' is not an allowed", and no solution: [ariya/phantomjs#13114](https://github.com/ariya/phantomjs/issues/13114). 
 
 ## Start & Use Docker Step By Step - Chrome as reference
 **1. Copy the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
@@ -113,6 +116,8 @@ You could refer to the samples to get started for visual regression testing.
         --shm-size 1024m \
         kenith/ta-visual-lib:latest
    ```
+   
+   ![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
    
   
 **2. Access the [http://localhost:6901/?password=vncpassword/](http://localhost:6901/?password=vncpassword/) to the noVNC Env**

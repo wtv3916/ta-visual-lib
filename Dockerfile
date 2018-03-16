@@ -100,7 +100,7 @@ RUN echo "Installing slimerjs v${SLIMERJS_VERSION}..." \
 
 # Installing BackstopJS
 RUN echo "Installing BackstopJS v${BACKSTOPJS_VERSION}..." \
-	&& npm install -g backstopjs@${BACKSTOPJS_VERSION}
+	&& npm install -g backstopjs@3.1.19
 
 # Installing Gemini
 RUN echo "Installing Gemini v${GEMINI_VERSION}..." \
