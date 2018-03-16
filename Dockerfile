@@ -17,7 +17,7 @@ ARG PHANTOMJS_VERSION=2.1.1
 ARG CHROMEDRIV_VERSION=2.36
 ARG CASPERJS_VERSION=1.1.4
 ARG SLIMERJS_VERSION=0.10.3
-ARG BACKSTOPJS_VERSION=3.1.17
+ARG BACKSTOPJS_VERSION=3.1.19
 ARG GEMINI_VERSION=5.5.1
 ARG GEMINIGUI_VERSION=5.3.1
 ARG GEMINIHTMLREPORTER_VERSION=2.6.1
@@ -100,7 +100,7 @@ RUN echo "Installing slimerjs v${SLIMERJS_VERSION}..." \
 
 # Installing BackstopJS
 RUN echo "Installing BackstopJS v${BACKSTOPJS_VERSION}..." \
-	&& npm install -g backstopjs@3.1.19
+	&& npm install -g backstopjs@${BACKSTOPJS_VERSION}
 
 # Installing Gemini
 RUN echo "Installing Gemini v${GEMINI_VERSION}..." \
