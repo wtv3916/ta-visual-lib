@@ -117,10 +117,8 @@ You could refer to the samples to get started for visual regression testing.
         kenith/ta-visual-lib:latest
    ```
    
-   ![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
-   
-  
 **2. Access the [http://localhost:6901/?password=vncpassword/](http://localhost:6901/?password=vncpassword/) to the noVNC Env**
+![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
 
 **3. Open terminal and cd to your folder: cd /tmp**
 
