@@ -1,7 +1,7 @@
 # TA Visual Regression Testing Library
 
 ## Build
-Get the source and sample from git [kenith/ta-visual-lib](https://github.com/Kenith/ta-visual-lib), and build image: `docker build -t ta-visual-lib .`
+Get the source and sample from git hub [kenith/ta-visual-lib](https://github.com/Kenith/ta-visual-lib), and build image: `docker build -t ta-visual-lib .`
 
 Or, pull the image from docker hub - [kenith/ta-visual-lib](https://hub.docker.com/r/kenith/ta-visual-lib/): `docker pull kenith/ta-visual-lib:latest`
 
@@ -12,6 +12,88 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
 1. [BackstopJS - 3.1.19](https://github.com/garris/BackstopJS)
 
 2. [Gemini - 5.5.1](https://github.com/gemini-testing/gemini)
+
+## Start & Use Docker Step By Step - Chrome as reference
+**1. Copy the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
+   ```
+   docker run \
+        -v ~/Debug:/tmp \
+        --rm \
+        -p 6901:6901 \
+        -p 5901:5901 \
+        --shm-size 1024m \
+        kenith/ta-visual-lib:latest
+   ```
+   
+**2. Access the [http://localhost:6901/?password=vncpassword/](http://localhost:6901/?password=vncpassword/) to the noVNC Env**
+![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
+
+**3. Open terminal and cd to your folder: cd /tmp**
+
+**4. If using BackstopJS**
+- For example, cd to the BackstopJS_Chrome_SimulatePC&iPhone.
+- Update the proxy in backstop.json for necessary, if behind the proxy
+- Create reference: `backstop reference`
+- Create Test: `backstop test`
+- You could find your test result in the folder: **backstop_data**
+
+**5. If using Gemini**
+- For example, cd to the Gemini_Chrome_SimulatePC&iPhone.
+- Update the proxy in .gemini.js for necessary, if behind the proxy
+- Start the chrome driver: `chromedriver --port=6666 --silent &`
+- Create reference: `gemini update demo.js`
+- Create Test: `gemini test demo.js`
+
+## Start & Use Docker Directly - Chrome as reference
+**1. Assume you have copied the folder "Sample" to the ~/Debug**
+
+**2. Update the proxy in backstop.json, or .gemini.js if behind the proxy**
+
+**3. If using BackstopJS**
+- Create Reference
+     ```
+     docker run \
+        -v ~/Debug:/tmp \
+        --rm \
+        -p 6901:6901 \
+        -p 5901:5901 \
+        --shm-size 1024m \
+        kenith/ta-visual-lib:latest \
+        /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_SimulatePC\&iPhone; backstop reference"
+     ```
+
+- Run Test
+    ```
+     docker run \
+        -v ~/Debug:/tmp \
+        --rm \
+        -p 6901:6901 \
+        -p 5901:5901 \
+        --shm-size 1024m \
+        kenith/ta-visual-lib:latest \
+        /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_SimulatePC\&iPhone; backstop test"
+     ```
+
+**4. If using Gemini**
+- Create Reference
+    ```
+    docker run \
+        -v ~/Debug:/tmp \
+        --rm \
+        --shm-size 1024m \
+        kenith/ta-visual-lib:latest \
+        /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini update demo.js"
+    ```
+
+- Run Test
+    ```
+    docker run \
+        -v ~/Debug:/tmp \
+        --rm \
+        --shm-size 1024m \
+        kenith/ta-visual-lib:latest \
+        /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini test demo.js"
+    ```
 
 ## Pre-Conditions If Behind the Proxy
 If you are struggling with the proxy, try to solve the proxy issue by followings
@@ -104,88 +186,6 @@ You could refer to the samples to get started for visual regression testing.
 **6. Gemini_PhantomJS_SimulatePC&iPhone**
 - Start phantomjs driver before testing: `phantomjs --webdriver=9999 --ignore-ssl-errors==true`
 - Not suggest to use Phantom for test, could trigger error "'unsafe-eval' is not an allowed", and no solution: [ariya/phantomjs#13114](https://github.com/ariya/phantomjs/issues/13114). 
-
-## Start & Use Docker Step By Step - Chrome as reference
-**1. Copy the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
-   ```
-   docker run \
-        -v ~/Debug:/tmp \
-        --rm \
-        -p 6901:6901 \
-        -p 5901:5901 \
-        --shm-size 1024m \
-        kenith/ta-visual-lib:latest
-   ```
-   
-**2. Access the [http://localhost:6901/?password=vncpassword/](http://localhost:6901/?password=vncpassword/) to the noVNC Env**
-![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
-
-**3. Open terminal and cd to your folder: cd /tmp**
-
-**4. If using BackstopJS**
-- For example, cd to the BackstopJS_Chrome_SimulatePC&iPhone.
-- Update the proxy in backstop.json for necessary, if behind the proxy
-- Create reference: `backstop reference`
-- Create Test: `backstop test`
-- You could find your test result in the folder: **backstop_data**
-
-**5. If using Gemini**
-- For example, cd to the Gemini_Chrome_SimulatePC&iPhone.
-- Update the proxy in .gemini.js for necessary, if behind the proxy
-- Start the chrome driver: `chromedriver --port=6666 --silent &`
-- Create reference: `gemini update demo.js`
-- Create Test: `gemini test demo.js`
-
-## Start & Use Docker Directly
-**1. Assume you have copied the folder "Sample" to the ~/Debug**
-
-**2. Update the proxy in backstop.json, or .gemini.js if behind the proxy**
-
-**3. If using BackstopJS**
-- Create Reference
-     ```
-     docker run \
-        -v ~/Debug:/tmp \
-        --rm \
-        -p 6901:6901 \
-        -p 5901:5901 \
-        --shm-size 1024m \
-        kenith/ta-visual-lib:latest \
-        /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_SimulatePC\&iPhone; backstop reference"
-     ```
-
-- Run Test
-    ```
-     docker run \
-        -v ~/Debug:/tmp \
-        --rm \
-        -p 6901:6901 \
-        -p 5901:5901 \
-        --shm-size 1024m \
-        kenith/ta-visual-lib:latest \
-        /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_SimulatePC\&iPhone; backstop test"
-     ```
-
-**4. If using Gemini**
-- Create Reference
-    ```
-    docker run \
-        -v ~/Debug:/tmp \
-        --rm \
-        --shm-size 1024m \
-        kenith/ta-visual-lib:latest \
-        /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini update demo.js"
-    ```
-
-- Run Test
-    ```
-    docker run \
-        -v ~/Debug:/tmp \
-        --rm \
-        --shm-size 1024m \
-        kenith/ta-visual-lib:latest \
-        /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini test demo.js"
-    ```
 
 ## System Info:
 1. OS: CentOS 7
