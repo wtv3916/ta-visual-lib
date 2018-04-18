@@ -8,21 +8,20 @@ ENV REFRESHED_AT 2018-03-13
 # ENV https_proxy 127.0.0.1:3128
 
 ARG CHROME=latest
-# SlimerJS only support firefox from 38.0.0 - 52.*
-# Gemini only support firefox < 48.*
-# So we select Firefox version 47.0.2 for test: https://github.com/gemini-testing/gemini/issues/688
+# Gemini - Firefox 47.0.2 for test: https://github.com/gemini-testing/gemini/issues/688
+# BackstopJS - Firefox: No matter using Slimer 0.10.3 or 1.0.0, the backstopjs has a bug here: https://github.com/garris/BackstopJS/issues/311
 ARG FIREFOX_VERSION=47.0.2
 ARG GECKO_VERSION=0.13.0
 ARG PHANTOMJS_VERSION=2.1.1
-ARG CHROMEDRIV_VERSION=2.36
+ARG CHROMEDRIV_VERSION=2.37
 ARG CASPERJS_VERSION=1.1.4
-ARG SLIMERJS_VERSION=0.10.3
-ARG BACKSTOPJS_VERSION=3.1.19
-ARG GEMINI_VERSION=5.5.1
-ARG GEMINIGUI_VERSION=5.3.1
-ARG GEMINIHTMLREPORTER_VERSION=2.6.1
+ARG SLIMERJS_VERSION=1.0.0
+ARG BACKSTOPJS_VERSION=3.2.14
+ARG GEMINI_VERSION=5.6.2
+ARG GEMINIGUI_VERSION=6.0.0
+ARG GEMINIHTMLREPORTER_VERSION=2.14.0
 ARG SELENIUMSTANDALONE_VERSION=6.12.0
-ARG NODEJS_VERSION=8.9.4
+ARG NODEJS_VERSION=8.x
 ARG NPM_VERSION=5.6.0
 ARG USER=ta-visual-lib
 # Use 2.53.1 to support firefox for Gemini: https://github.com/gemini-testing/gemini/issues/643#issuecomment-278339739
@@ -73,22 +72,25 @@ RUN echo "Installing chrome v${CHROME}..." \
 
 # Install NPM & NodeJS
 RUN echo "Installing npm & nodejs by yum..." \
-    && yum install -y epel-release \
-    && yum install -y openssl \
     && yum install -y gcc-c++ make \
+    && curl -Lk --silent --location https://rpm.nodesource.com/setup_${NODEJS_VERSION} | sudo bash - \
     && yum install -y nodejs
+
+RUN echo "Installing Java..." \
+    && yum install -y java
 
 # NPM Settings
 RUN npm config set registry http://registry.npmjs.org/ \
-    && npm config set user 0 \
-    && npm config set unsafe-perm true
+#    && npm config set user 10000 \
+    && npm config set unsafe-perm true \
+    && npm config set prefix "/usr/local/"
 
 # Update NPM & NodeJS
-RUN echo "Update NodeJS from 6.x to v${NODEJS_VERSION}..." \
-    && npm install -g n \
-    && n v${NODEJS_VERSION} \
-    && echo "Update NPM from 3.x to v${NPM_VERSION}..." \
-    && npm install -g npm@${NPM_VERSION}
+#RUN echo "Update NodeJS to v${NODEJS_VERSION}..." \
+#    && npm install -g n \
+#    && n v${NODEJS_VERSION} \
+#    && echo "Update NPM to v${NPM_VERSION}..." \
+#    && npm install -g npm@${NPM_VERSION}
 
 # Installing CasperJS
 RUN echo "Installing casperjs v${CASPERJS_VERSION}..." \
@@ -99,8 +101,10 @@ RUN echo "Installing slimerjs v${SLIMERJS_VERSION}..." \
     && npm install -g slimerjs@${SLIMERJS_VERSION}
 
 # Installing BackstopJS
+# Notice the puppeteer on Centos issue here: https://github.com/GoogleChrome/puppeteer/issues/391
 RUN echo "Installing BackstopJS v${BACKSTOPJS_VERSION}..." \
-	&& npm install -g backstopjs@${BACKSTOPJS_VERSION}
+	&& npm install -g backstopjs@${BACKSTOPJS_VERSION} \
+	&& yum install pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 libXi.x86_64 libXtst.x86_64 cups-libs.x86_64 libXScrnSaver.x86_64 libXrandr.x86_64 GConf2.x86_64 alsa-lib.x86_64 atk.x86_64 gtk3.x86_64 ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc -y
 
 # Installing Gemini
 RUN echo "Installing Gemini v${GEMINI_VERSION}..." \
@@ -113,8 +117,6 @@ RUN echo "Installing Gemini v${GEMINI_VERSION}..." \
 COPY default-config.js /usr/local/lib/node_modules/selenium-standalone/lib/
 
 # Installing Selenium Standalone Dependencies
-RUN echo "Installing Java..." \
-    && yum install -y java
 RUN echo "Installing Selenium-Server v${SELENIUM_SERVER_VERSION}, ChromeDriver v${CHROMEDRIV_VERSION}, GeckDriver v${GECKO_VERSION}" \
     && selenium-standalone install
 
@@ -122,7 +124,10 @@ RUN echo "Installing Selenium-Server v${SELENIUM_SERVER_VERSION}, ChromeDriver v
 RUN adduser -m -u 10000 -U ${USER} \
     && usermod -aG wheel ${USER} \
     && sed -i "\$a${USER} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers \
-    && chmod u+s /usr/bin/sudo
+    && chmod u+s /usr/bin/sudo \
+    && chown -R ${USER}:${USER} /home/${USER} \
+    && chown -R ${USER}:${USER} /usr/local/lib/node_modules \
+    && chown -R ${USER}:${USER} /usr/local/bin
 
 # Change user from root -> ${user}
 USER ${USER}
