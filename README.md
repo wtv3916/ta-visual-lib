@@ -23,7 +23,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
 
 2. [Gemini - 5.6.2](https://github.com/gemini-testing/gemini)
 
-## User Docker Step by Step
+## Use Docker Step by Step
 **1. Copy the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
    ```
    docker run \
@@ -192,7 +192,7 @@ You could refer to the samples to get started for visual regression testing.
 - Suggest to set `"debugWindow": false` if running test
 - For passing cookie, if you site is using http, please edit backstop_data/engine_scripts/chromy/loadCookies.js: `cookie.url = 'http://' + cookie.domain;`
 - You could edit the backstop_data/engine_scripts/chromy/onReady.js to edit the user actions. All the defined user actions could be found in interactions.js
-- Bug: 
+- Git Hub Bug: [https://github.com/garris/BackstopJS/issues/744](https://github.com/garris/BackstopJS/issues/744)
 
 **3. BackstopJS_Chrome_PuppeteerEngine_SimulatePC&iPhone**
 - Suggest to set `"debugWindow": false` if running test
@@ -219,12 +219,12 @@ You could refer to the samples to get started for visual regression testing.
 **8. Gemini_Firefox_SimulatePC&iPhone**
 - Start the selenium-standalone before testing: `selenium-standalone start`
 - No headless mode of which is provided by Firefox 56+
-- Need Help to pass the user agent: 
+- Need Help to pass the user agent: [https://github.com/gemini-testing/gemini/issues/907](https://github.com/gemini-testing/gemini/issues/907)
 
 **9. Gemini_PhantomJS_SimulatePC&iPhone**
 - Start phantomjs driver before testing: `phantomjs --webdriver=9999 --ignore-ssl-errors=true`
 - Not suggest to use Phantom for test, could trigger error "'unsafe-eval' is not an allowed", and no solution: [ariya/phantomjs#13114](https://github.com/ariya/phantomjs/issues/13114). 
-- Bug: 
+- Global Settings Bug: [https://github.com/gemini-testing/gemini/issues/908](https://github.com/gemini-testing/gemini/issues/908)
 
 ## System Info
 1. OS: CentOS 7
