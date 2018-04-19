@@ -1,7 +1,7 @@
 FROM consol/centos-xfce-vnc:latest
 
 MAINTAINER Wang Cheng (Ken) "463407426@qq.com"
-ENV REFRESHED_AT 2018-03-13
+ENV REFRESHED_AT 2018-04-19
 
 # Set proxy if necessary
 # ENV http_proxy 127.0.0.1:3128
