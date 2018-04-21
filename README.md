@@ -19,7 +19,7 @@ Or, pull the image from docker hub - [kenith/ta-visual-lib](https://hub.docker.c
 For now, we support the following Visual Regression Testing Library.
 No matter which tool you use, if no necessary, we suggest to use Chrome for Visual Regression.
 
-1. [BackstopJS - 3.2.14](https://github.com/garris/BackstopJS)
+1. [BackstopJS - 3.2.15](https://github.com/garris/BackstopJS)
 
 2. [Gemini - 5.6.2](https://github.com/gemini-testing/gemini)
 
@@ -188,11 +188,10 @@ You could refer to the samples to get started for visual regression testing.
 **1. BackstopJS_Chrome_ChromyEngine_SimulatePC&iPhone**
 - Suggest to set `"debugWindow": false` if running test
 
-**2. BackstopJS_Chrome_ChromyEngine_SimulateCookie&UserActions_Bug**
+**2. BackstopJS_Chrome_ChromyEngine_SimulateCookie&UserActions**
 - Suggest to set `"debugWindow": false` if running test
 - For passing cookie, if you site is using http, please edit backstop_data/engine_scripts/chromy/loadCookies.js: `cookie.url = 'http://' + cookie.domain;`
 - You could edit the backstop_data/engine_scripts/chromy/onReady.js to edit the user actions. All the defined user actions could be found in interactions.js
-- Git Hub Bug: [https://github.com/garris/BackstopJS/issues/744](https://github.com/garris/BackstopJS/issues/744)
 
 **3. BackstopJS_Chrome_PuppeteerEngine_SimulatePC&iPhone**
 - Suggest to set `"debugWindow": false` if running test
@@ -241,7 +240,7 @@ You could refer to the samples to get started for visual regression testing.
 
 6. NPM v5.6.0
 
-7. BackstopJS v3.2.11
+7. BackstopJS v3.2.15
 
 8. CasperJS v1.1.4
 
@@ -249,7 +248,7 @@ You could refer to the samples to get started for visual regression testing.
 
 10. Gemini v5.6.2
 
-11. Gemini GUI v6.0.0
+11. Gemini GUI v6.0.1
 
 12. Gemini HTML Reporter v2.14.0
 
