@@ -24,7 +24,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
 2. [Gemini - 5.6.2](https://github.com/gemini-testing/gemini)
 
 ## Use Docker Step by Step
-**1. Copy the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
+**1. Assuming that you have copied the "Sample" folder to the ~/Debug to assign the local path ~/Debug to docker path /tmp, and start the docker container**
    ```
    docker run \
         -v ~/Debug:/tmp \
@@ -228,7 +228,7 @@ You could refer to the samples to get started for visual regression testing.
 ## System Info
 1. OS: CentOS 7
 
-2. Chrome v65.0.3325.181 - ChromeDriver v2.37
+2. Chrome v66.0.3359.117 - ChromeDriver v2.38
 
 3. Firefox v47.0.2 - GeckoDriver v0.13.0 
    Gemini - Firefox 47.0.2 for test: [https://github.com/gemini-testing/gemini/issues/688](https://github.com/gemini-testing/gemini/issues/688)
