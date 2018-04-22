@@ -31,7 +31,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
         --rm \
         -p 6901:6901 \
         -p 5901:5901 \
-        --shm-size 1024m \
+        --shm-size 2048m \
         kenith/ta-visual-lib:latest
    ```
    
@@ -67,7 +67,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
         --rm \
         -p 6901:6901 \
         -p 5901:5901 \
-        --shm-size 1024m \
+        --shm-size 2048m \
         kenith/ta-visual-lib:latest \
         /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_ChromyEngine_SimulatePC&iPhone; backstop reference"
      ```
@@ -79,7 +79,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
         --rm \
         -p 6901:6901 \
         -p 5901:5901 \
-        --shm-size 1024m \
+        --shm-size 2048m \
         kenith/ta-visual-lib:latest \
         /bin/bash -c "cd /tmp/Sample/BackstopJS_Chrome_ChromyEngine_SimulatePC&iPhone; backstop test"
      ```
@@ -90,7 +90,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
     docker run \
         -v ~/Debug:/tmp \
         --rm \
-        --shm-size 1024m \
+        --shm-size 2048m \
         kenith/ta-visual-lib:latest \
         /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini update demo.js"
     ```
@@ -100,7 +100,7 @@ No matter which tool you use, if no necessary, we suggest to use Chrome for Visu
     docker run \
         -v ~/Debug:/tmp \
         --rm \
-        --shm-size 1024m \
+        --shm-size 2048m \
         kenith/ta-visual-lib:latest \
         /bin/bash -c "cd /tmp/Sample/Gemini_Chrome_SimulatePC\&iPhone/; chromedriver --port=6666 --silent & gemini test demo.js"
     ```
