@@ -1,5 +1,12 @@
 # TA Visual Regression Testing Library
 
+> Why choose the docker [kenith/ta-visual-lib](https://hub.docker.com/r/kenith/ta-visual-lib/) for Visual Regression Testing: 
+> 1. With no VNC supports, we could debug our script easier and more flexible
+![alt text](https://raw.githubusercontent.com/kenith/ta-visual-lib/dev/noVPC_Sample.png)
+> 2. Support latest **BackstopJS** and **Gemini** in one docker image
+> 3. Installed browsers, such as Chrome, Firefox, PhantomJS for testing, which you do NOT need to take time to config your browsers
+> 4. Provided samples for BackstopJS and Gemini
+
 ## Content
 - [Build](#build)
 - [Supports](#supports)
